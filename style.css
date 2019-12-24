@@ -1,0 +1,99 @@
+* {                          /* this first entry resets the layout to be modern. sick hack */
+    margin: 0;                 /* standard properties to edit */
+    padding: 0;
+    box-sizing: 0;
+}
+
+.app {                 /*to style a section, simply '.xxx {}' the name of the elemenet */
+    height: 100vh;      /*'vertical height'. you can use many different metrics to style*/
+    display: flex;      /*my fav property 'flex' makes the style smart adjust to the screen*/
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.time-select,
+.sound-picker,
+.player-container {     /*all these elements can be grouped to useing a comma! so they will share the same styling*/
+    height: 80%;
+    flex:1;                /*the flex is really an equal height & width of a value*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.player-container {   /* any unique changes additional to the existing can be made by declaring again*/
+    position: relative;
+}
+
+.player-container svg {
+    position: absolute;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /*unique way to move image using positioning on dimensional plain*/
+    pointer-events: none;
+}
+
+
+.time-display {
+    position: absolute;
+    bottom: 10%;
+    color: white;
+    font-size: 50px;
+}
+
+ .vid-container {
+     /* display: none;     /* makes the diplay not visible */
+    position: fixed;
+    top: 0%;
+    bottom: 0%;
+    width: 100%;
+    z-index: -10;  /* how to put items in the background using the zplain of axis. '0' is the default. so any number below 0 can work*/
+}
+
+.time-select button,
+.sound-picker button {
+    color: white;
+    width: 30%;
+    height: 10%;
+    background: none;
+    border: 2px solid white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+    transition: all 0.5s ease:
+}
+
+.time-select button:hover {
+    color: black;
+    background: white;
+}
+
+.sound-picker button {
+    border: solid;
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+    padding: 30px;
+}
+
+.sound-picker img {     /*since we are overlaying imgs over each other, this trick of adjusting the 'height' to 100% makes it auto adjust*/
+    height: 100%;
+}
+
+.sound-picker button:nth-child(1){      /*cool way to select the buttons indv without explicity. using the nth child as refernce in a div tree*/
+    background: #6699ff;
+}
+
+.sound-picker button:nth-child(2){
+    background: #ff6666;
+}
+
+.sound-picker button:hover {  /* added a hover pop effect*/
+/*    height: 140px;
+    width: 140px;
+*/
+    background: #ccddff;
+}
