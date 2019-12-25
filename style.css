@@ -24,7 +24,7 @@
 }
 
 .player-container {   /* any unique changes additional to the existing can be made by declaring again*/
-    position: relative;
+    position: relative
 }
 
 .player-container svg {

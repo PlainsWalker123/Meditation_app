@@ -10,6 +10,7 @@ const app = () => {  // grabbing all the values from hmtl file as point of refer
     //Time Display
     const timeDisplay = document.querySelector('.time-display');
     const timeSelect = document.querySelectorAll('.time-select button');
+
     //Get the length of the outline
     const outlineLength = outline.getTotalLength();
     console.log(outlineLength);
@@ -20,12 +21,21 @@ const app = () => {  // grabbing all the values from hmtl file as point of refer
     outline.style.strokeDasharray = outlineLength; // clever way to animate. with the 2 images overtop each other we can seperate and use css styling to create an animation effect
     outline.style.strokeDashoffset = outlineLength; // this is the overlay that will count down the progress bar
 
+    //Pick different sounds
+    sounds.forEach(sound => {               // setting the soundscape when you select.
+        sound.addEventListener('click', function(){
+            song.src = this.getAttribute('data-sound');
+            video.src = this.getAttribute('data-video');
+            checkPlaying(song);
+        });
+    });
+
     // Play sounds
     play.addEventListener('click', () => {
         checkPlaying(song);
     });
 
-    //Select sound
+    //Select time interval
     timeSelect.forEach(option => {
         option.addEventListener('click', function (){
             fakeDuration = this.getAttribute('data-time');
@@ -49,17 +59,24 @@ const app = () => {  // grabbing all the values from hmtl file as point of refer
 
     //We can animate the circle
     song.ontimeupdate = () => {
-        let currentTime = song.currentTime;
+        let currentTime = song.currentTime;         // a built in fn to get time of media
         let elapsed = fakeDuration - currentTime;
         let seconds = Math.floor(elapsed % 60);
         let minutes = Math.floor(elapsed / 60);
 
     // Animate the circle progress bar
     let progress = outlineLength - (currentTime / fakeDuration) * outlineLength;
-    outlineLength.style.strokeDashoffset = progress;
+    //outlineLength.style.strokeDashoffset = progress;
 
     // Animate the timeDisplay
     timeDisplay.textContent = `${minutes}:${seconds}`;
+
+    if (currentTime >= fakeDuration) {      // to make the time reset to normal after it finishes
+        song.pause();
+        song.currentTime = 0;
+        play.src = './svg/play.svg';
+        video.pause();
+    }
     };
 
 }; // run all code
